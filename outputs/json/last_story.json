@@ -1,0 +1,45 @@
+{
+  "title": "Le cochon courageux",
+  "age_group": "5-12 ans",
+  "scenes": [
+    {
+      "scene_no": 1,
+      "text": "Un cochon nommé Coco vit dans une forêt. Il aime jouer avec ses amis. Coco est courageux.",
+      "image_prompt": "Un cochon rose avec un grand sourire, debout devant un arbre vert",
+      "question": null,
+      "choices": []
+    },
+    {
+      "scene_no": 2,
+      "text": "Un jour, un dinosaure perdu arrive dans la forêt. Il a peur. Coco va aider son nouvel ami.",
+      "image_prompt": "Un cochon rose et un dinosaure vert debout côte à côte, dans une clairière",
+      "question": "Et toi, que ferais-tu pour aider le dinosaure perdu ?",
+      "choices": [
+        "Je lui donnerais un repas",
+        "Je lui montrerais le chemin"
+      ]
+    },
+    {
+      "scene_no": 3,
+      "text": "Coco partage son repas avec le dinosaure. Le dinosaure est heureux. Coco est fier de son acte de générosité.",
+      "image_prompt": "Un cochon rose et un dinosaure vert partageant un panier de fruits, sous un arbre",
+      "question": null,
+      "choices": []
+    },
+    {
+      "scene_no": 4,
+      "text": "Maintenant, le dinosaure est chez lui. Il remercie Coco pour son courage et son amitié. Coco sourit.",
+      "image_prompt": "Un cochon rose et un dinosaure vert se disant au revoir, avec des sourires",
+      "question": "Et toi, que ferais-tu pour dire au revoir à ton nouvel ami ?",
+      "choices": [
+        "Je lui donnerais un câlin",
+        "Je lui écrirais une lettre"
+      ]
+    }
+  ],
+  "target_words": [
+    "courage",
+    "amitié",
+    "partage"
+  ]
+}

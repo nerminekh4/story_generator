@@ -1,0 +1,12 @@
+{
+  "name": "nermine",
+  "age": 5,
+  "reading_level": "avancé",
+  "interests": [
+    "dinosaures"
+  ],
+  "difficulties": [
+    "timidité"
+  ],
+  "pedagogy_goal": "partage"
+}
