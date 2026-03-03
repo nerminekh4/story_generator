@@ -1,45 +1,45 @@
 {
-  "title": "Le cochon courageux",
-  "age_group": "5-12 ans",
+  "title": "Le Petit Renard et la Forêt Magique",
+  "age_group": "4-6",
   "scenes": [
     {
       "scene_no": 1,
-      "text": "Un cochon nommé Coco vit dans une forêt. Il aime jouer avec ses amis. Coco est courageux.",
-      "image_prompt": "Un cochon rose avec un grand sourire, debout devant un arbre vert",
+      "text": "Un petit renard rouge vit dans une forêt magique. Il aime jouer.",
+      "image_prompt": "Un petit renard rouge souriant dans une forêt verte avec des fleurs colorées",
       "question": null,
       "choices": []
     },
     {
       "scene_no": 2,
-      "text": "Un jour, un dinosaure perdu arrive dans la forêt. Il a peur. Coco va aider son nouvel ami.",
-      "image_prompt": "Un cochon rose et un dinosaure vert debout côte à côte, dans une clairière",
-      "question": "Et toi, que ferais-tu pour aider le dinosaure perdu ?",
+      "text": "Il rencontre un ami, un oiseau bleu. Ils partagent des baies.",
+      "image_prompt": "Un petit renard rouge et un oiseau bleu partageant des baies rouges dans un panier",
+      "question": "Et toi, que ferais-tu ?",
       "choices": [
-        "Je lui donnerais un repas",
-        "Je lui montrerais le chemin"
+        "Partager des baies",
+        "Jouer seul"
       ]
     },
     {
       "scene_no": 3,
-      "text": "Coco partage son repas avec le dinosaure. Le dinosaure est heureux. Coco est fier de son acte de générosité.",
-      "image_prompt": "Un cochon rose et un dinosaure vert partageant un panier de fruits, sous un arbre",
+      "text": "Le petit renard est heureux. L'amitié est importante. Il aime partager.",
+      "image_prompt": "Un petit renard rouge souriant avec un oiseau bleu et un panier de baies",
       "question": null,
       "choices": []
     },
     {
       "scene_no": 4,
-      "text": "Maintenant, le dinosaure est chez lui. Il remercie Coco pour son courage et son amitié. Coco sourit.",
-      "image_prompt": "Un cochon rose et un dinosaure vert se disant au revoir, avec des sourires",
-      "question": "Et toi, que ferais-tu pour dire au revoir à ton nouvel ami ?",
+      "text": "Le petit renard et l'oiseau bleu jouent ensemble. Ils sont amis.",
+      "image_prompt": "Un petit renard rouge et un oiseau bleu jouant ensemble dans une prairie verte",
+      "question": "Et toi, que ferais-tu ?",
       "choices": [
-        "Je lui donnerais un câlin",
-        "Je lui écrirais une lettre"
+        "Jouer avec un ami",
+        "Dormir"
       ]
     }
   ],
   "target_words": [
-    "courage",
+    "partager",
     "amitié",
-    "partage"
+    "joie"
   ]
 }

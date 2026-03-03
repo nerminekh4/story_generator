@@ -10,6 +10,47 @@ from story.image_generator import generate_image
 from story.storage import ensure_dirs, save_json
 from story.export_pdf import export_story_to_pdf
 
+
+def is_bad_image(path: str) -> bool:
+    if not os.path.exists(path):
+        return True
+    try:
+        return os.path.getsize(path) < 2000  # évite fichiers vides / erreurs JSON sauvegardées
+    except OSError:
+        return True
+
+
+def safe_generate_and_show_image(image_prompt: str, img_path: str, child_profile: dict):
+    """
+    - supprime une image cassée
+    - tente de générer
+    - affiche l'image si OK sinon affiche l'erreur
+    """
+    # si image cassée, on supprime pour forcer la régénération
+    if is_bad_image(img_path) and os.path.exists(img_path):
+        try:
+            os.remove(img_path)
+        except OSError:
+            pass
+
+    # si pas d'image, on génère
+    if not os.path.exists(img_path):
+        try:
+            generate_image(image_prompt, img_path, child_profile=child_profile)
+        except Exception as e:
+            st.error("Erreur génération image (Hugging Face).")
+            st.code(str(e))
+            return
+
+    # si toujours cassée -> message clair
+    if is_bad_image(img_path):
+        st.error("Image non générée (fichier vide ou invalide).")
+        return
+
+    # sinon affiche
+    st.image(img_path, use_column_width=True)
+
+    
 # ---------------------------
 # Setup
 # ---------------------------
@@ -419,10 +460,25 @@ with right:
         unsafe_allow_html=True,
     )
     img_path = f"outputs/images/scene_{scene_no}.png"
-    if not os.path.exists(img_path):
-        with st.spinner("Génération image..."):
-            generate_image(image_prompt, img_path, child_profile=profile.model_dump())
-    st.image(img_path, use_column_width=True)
+
+    with st.spinner("Génération image..."):
+        if is_bad_image(img_path) and os.path.exists(img_path):
+            try:
+                os.remove(img_path)
+            except OSError:
+                pass
+
+        if not os.path.exists(img_path):
+            try:
+                generate_image(image_prompt, img_path, child_profile=profile.model_dump())
+            except Exception as e:
+                st.error("Erreur génération image (Hugging Face).")
+                st.code(str(e))
+
+    if not is_bad_image(img_path):
+        st.image(img_path, use_column_width=True)
+    else:
+        st.error("Image non générée ou fichier invalide.")
 
 # Choix interactif (si présent)
 question = scene.get("question")
