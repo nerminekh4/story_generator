@@ -15,7 +15,7 @@ def is_bad_image(path: str) -> bool:
     if not os.path.exists(path):
         return True
     try:
-        return os.path.getsize(path) < 2000  # évite fichiers vides / erreurs JSON sauvegardées
+        return os.path.getsize(path) < 2000  
     except OSError:
         return True
 
@@ -224,6 +224,30 @@ div[data-testid="stButton"] > button[kind="primary"]{
 div[data-testid="stProgress"] > div > div {
   border-radius: 999px !important;
 }
+
+/* ===============================
+   FIX RADIO CHOICES VISIBILITY
+   =============================== */
+   
+/* Texte "Sélection :" */
+div[data-testid="stRadio"] > label {
+  color: #111827 !important;
+  font-size:18px;
+}
+
+/* Texte des options radio */
+div[role="radiogroup"] > label {
+  color: #111827 !important;
+  font-size:14px;
+}
+
+/* Cercle sélectionné (petite pastille) */
+div[role="radiogroup"] div {
+  color: #111827 !important;
+  border-color: #ff1f4b !important;
+}
+
+
 </style>
 """,
     unsafe_allow_html=True,
@@ -481,21 +505,92 @@ with right:
         st.error("Image non générée ou fichier invalide.")
 
 # Choix interactif (si présent)
+# Choix interactif (si présent)
 question = scene.get("question")
-choices = scene.get("choices", [])
-if question and isinstance(choices, list) and len(choices) >= 2:
+
+# Certaines IA renvoient les choix sous d'autres clés
+choices_raw = scene.get("choices")
+if choices_raw is None:
+    choices_raw = scene.get("options")
+if choices_raw is None:
+    choices_raw = scene.get("answers")
+
+def normalize_choices(x):
+    # 1) Liste déjà OK
+    if isinstance(x, list):
+        out = []
+        for item in x:
+            s = str(item).strip()
+            if s:
+                out.append(s)
+        return out
+
+    # 2) String: on extrait les lignes comme choix
+    if isinstance(x, str):
+        lines = []
+        for line in x.splitlines():
+            s = line.strip()
+            if not s:
+                continue
+            # supprime les préfixes "A)", "B)", "-", "•", "1."
+            s = s.lstrip("-• \t")
+            s = s.replace("A)", "").replace("B)", "").replace("C)", "").replace("D)", "")
+            s = s.strip()
+            if s:
+                lines.append(s)
+        # parfois c’est séparé par ";"
+        if len(lines) < 2 and ";" in x:
+            parts = [p.strip() for p in x.split(";") if p.strip()]
+            if len(parts) >= 2:
+                return parts
+        return lines
+
+    # 3) Autres types -> vide
+    return []
+
+choices = normalize_choices(choices_raw)
+
+if question and len(choices) >= 2:
+    st.markdown(
+        f"<p style='color:#111827; font-weight:bold; font-size:25px'>{question}</p>",
+        unsafe_allow_html=True,
+    )
+    
+    choice = st.radio("Sélection :", choices[:2], key=f"choice_{scene_no}")
+
+    if st.button("Valider", key=f"btn_{scene_no}"):
+        st.session_state.child_choices.append({"scene_no": scene_no, "choice": choice})
+        st.markdown(
+    """
+    <div style="
+        background-color:#fff4cc;
+        color:#111827;
+        padding:10px;
+        border-radius:12px;
+        font-weight:700;
+        text-align:center;
+        border:1px solid #ffd166;
+    ">
+        🌟 Bravo ! Super choix ! 🌟
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+        
+elif question:
+    # Si question présente mais pas de choix exploitables
     st.markdown(
         "<div class='sg-card'><h3 style='margin:0; color:#111827;'>Choix</h3></div>",
         unsafe_allow_html=True,
     )
     st.write(question)
-    choice = st.radio("Sélection :", choices[:2], key=f"choice_{scene_no}")
-    if st.button("Valider", key=f"btn_{scene_no}"):
-        st.session_state.child_choices.append({"scene_no": scene_no, "choice": choice})
-        st.success("Choix enregistré")
+    st.info("Aucun choix détecté pour cette scène (format inattendu).")
 
 # Debug (optionnel)
 with st.expander("Debug (optionnel)"):
     st.write("Mots cibles :", data.get("target_words", []))
     st.write("Choix enregistrés :", st.session_state.child_choices)
     st.code(image_prompt)
+    st.write("Question brute :", scene.get("question"))
+    st.write("Choices brutes :", scene.get("choices"))
+    st.write("Options brutes :", scene.get("options"))

@@ -22,10 +22,11 @@ CONTRAINTES LANGAGE:
 - Phrases courtes, vocabulaire simple.
 - Répéter 2 à 3 mots-clés importants pour mémorisation.
 - Toutes les 2 scènes: une question interactive ("Et toi, que ferais-tu ?") + 2 choix simples.
+- Chaque scène doit être assez longue de à peu près 500 mots par scène pour maintenir l'intérêt que l'enfant a pour l'histoire.
 
 INCLUSION:
-- Si difficultés incluent dyslexie: phrases très courtes, mots très simples, répétitions douces.
-- Si difficultés incluent attention: scènes courtes, action claire, peu de personnages secondaires.
+- Si difficultés incluent dyslexie: mots très simples, répétitions douces, adapter à une personne dyslexique.
+- Si difficultés incluent attention: action claire, peu de personnages secondaires, adapter à une personne qui a des troubles de l'attention.
 
 PARAMÈTRES HISTOIRE:
 - Personnage principal: {character}
@@ -43,7 +44,7 @@ FORMAT:
 Réponds UNIQUEMENT en JSON strict, sans texte autour:
 {{
   "title": "string",
-  "age_group": "string",
+  "age_group": "4-6 ou 7-9 ou 10-12",
   "scenes": [
     {{
       "scene_no": 1,

@@ -1,12 +1,12 @@
 {
-  "name": "nermine",
-  "age": 5,
+  "name": "sihem",
+  "age": 10,
   "reading_level": "avancé",
   "interests": [
-    "dinosaures"
+    "animaux"
   ],
   "difficulties": [
-    "timidité"
+    "dyslexie"
   ],
   "pedagogy_goal": "partage"
 }

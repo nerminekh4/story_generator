@@ -1,45 +1,45 @@
 {
-  "title": "Le Petit Renard et la Forêt Magique",
+  "title": "Le Petit Renard et ses Amis",
   "age_group": "4-6",
   "scenes": [
     {
       "scene_no": 1,
-      "text": "Un petit renard rouge vit dans une forêt magique. Il aime jouer.",
-      "image_prompt": "Un petit renard rouge souriant dans une forêt verte avec des fleurs colorées",
+      "text": "Dans une forêt magique, il y a un petit renard nommé Roux. Roux aime jouer avec ses amis. Il court, il saute, il rit. Roux est très heureux. Il aime partager ses jouets avec ses amis.",
+      "image_prompt": "Un petit renard roux courant dans une forêt verte avec des fleurs colorées",
       "question": null,
       "choices": []
     },
     {
       "scene_no": 2,
-      "text": "Il rencontre un ami, un oiseau bleu. Ils partagent des baies.",
-      "image_prompt": "Un petit renard rouge et un oiseau bleu partageant des baies rouges dans un panier",
+      "text": "Roux a trouvé un beau ballon rouge. Il veut le partager avec ses amis. Mais il ne sait pas qui inviter. Roux pense à son ami l'écureuil ou à son ami le lapin. Et toi, que ferais-tu ?",
+      "image_prompt": "Un petit renard roux tenant un ballon rouge, avec un écureuil et un lapin à côté",
       "question": "Et toi, que ferais-tu ?",
       "choices": [
-        "Partager des baies",
-        "Jouer seul"
+        "Inviter l'écureuil",
+        "Inviter le lapin"
       ]
     },
     {
       "scene_no": 3,
-      "text": "Le petit renard est heureux. L'amitié est importante. Il aime partager.",
-      "image_prompt": "Un petit renard rouge souriant avec un oiseau bleu et un panier de baies",
+      "text": "Roux décide d'inviter les deux. Ils jouent ensemble avec le ballon rouge. Ils rient, ils courent, ils sautent. Roux est très heureux de partager son ballon. Il aime voir ses amis heureux. Roux répète : 'Je partage, je partage, c'est amusant !'",
+      "image_prompt": "Un petit renard roux, un écureuil et un lapin jouant ensemble avec un ballon rouge",
       "question": null,
       "choices": []
     },
     {
       "scene_no": 4,
-      "text": "Le petit renard et l'oiseau bleu jouent ensemble. Ils sont amis.",
-      "image_prompt": "Un petit renard rouge et un oiseau bleu jouant ensemble dans une prairie verte",
+      "text": "Maintenant, Roux veut partager ses friandises. Il a des fruits rouges et des noix. Il veut les donner à ses amis. Mais il ne sait pas comment les répartir. Et toi, que ferais-tu ? Roux pense à partager à parts égales. Roux répète : 'Je partage, je partage, c'est amusant !'",
+      "image_prompt": "Un petit renard roux tenant un panier de fruits rouges et de noix, avec un écureuil et un lapin à côté",
       "question": "Et toi, que ferais-tu ?",
       "choices": [
-        "Jouer avec un ami",
-        "Dormir"
+        "Donner tout aux deux",
+        "Partager à parts égales"
       ]
     }
   ],
   "target_words": [
-    "partager",
-    "amitié",
-    "joie"
+    "partage",
+    "amis",
+    "heureux"
   ]
 }

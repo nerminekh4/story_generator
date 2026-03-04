@@ -53,11 +53,11 @@ def _hf_inference_call(prompt: str, model_id: str, token: str, timeout: int = 12
 
         ctype = (r.headers.get("content-type") or "").lower()
 
-        # ✅ Cas normal: on reçoit directement l'image
+        # Cas normal: on reçoit directement l'image
         if r.status_code == 200 and ("image" in ctype or ctype == "application/octet-stream"):
             return r.content
 
-        # Cas JSON d'erreur (modèle en chargement, quota, etc.)
+        # Cas JSON d'erreur (modèle en chargement, quota)
         try:
             data = r.json()
         except Exception:
@@ -77,11 +77,11 @@ def _hf_inference_call(prompt: str, model_id: str, token: str, timeout: int = 12
 
 def generate_image(image_prompt: str, out_path: str, child_profile: dict, width: int = 512, height: int = 512) -> None:
     """
-    Génère une image via Hugging Face Inference API.
+    Génère une image via Hugging Face 
 
     Notes:
-    - width/height ne sont pas toujours respectés par tous les modèles HF.
-    - Pour un rendu stable, on force un style "livre enfant" + contraintes profil.
+    - width/height ne sont pas toujours respectés par tous les modèles HF
+    - je force un style "livre enfant" + contraintes profil
     """
     token = os.getenv("HF_API_TOKEN", "").strip()
     if not token:
