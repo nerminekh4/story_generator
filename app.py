@@ -9,7 +9,7 @@ from story.tts import text_to_mp3
 from story.image_generator import generate_image
 from story.storage import ensure_dirs, save_json
 from story.export_pdf import export_story_to_pdf
-
+from story.progress_store import update_after_story, update_after_choice
 
 def is_bad_image(path: str) -> bool:
     if not os.path.exists(path):
@@ -375,6 +375,16 @@ if create_clicked:
         )
         st.session_state.story_data = story.model_dump()
         save_json(st.session_state.story_data, "outputs/json/last_story.json")
+        update_after_story(
+            child_profile=profile.model_dump(),
+            story_data=st.session_state.story_data,
+            meta={
+                "emotion": emotion,
+                "theme": theme,
+                "age_group": age_group,
+                "n_scenes": n_scenes,
+            },
+        )
         st.session_state.scene_index = 0
         st.session_state.child_choices = []
 
@@ -402,6 +412,12 @@ if st.session_state.story_data:
                 mime="application/pdf",
                 use_container_width=True,
             )
+    with exp_col3:
+        # Bouton vers la page parents (multipage Streamlit)
+        try:
+            st.page_link("pages/2_Dashboard_Parents.py", label="Espace Parents", use_container_width=True)
+        except Exception:
+            st.info("Page Parents: crée le fichier pages/2_Dashboard_Parents.py")
 
 # ---------------------------
 # Contenu
@@ -575,6 +591,12 @@ if question and len(choices) >= 2:
     </div>
     """,
     unsafe_allow_html=True,
+)
+        update_after_choice(
+    child_profile=profile.model_dump(),
+    scene_no=scene_no,
+    question=question,
+    choice=choice,
 )
         
 elif question:

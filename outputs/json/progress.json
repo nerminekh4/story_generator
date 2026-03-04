@@ -1,0 +1,60 @@
+{
+  "children": {
+    "sihem": {
+      "profile": {
+        "name": "sihem",
+        "age": 10,
+        "reading_level": "avancé",
+        "interests": [
+          "animaux"
+        ],
+        "difficulties": [
+          "dyslexie"
+        ],
+        "pedagogy_goal": "partage"
+      },
+      "stories_count": 2,
+      "words_learned": [
+        "partage",
+        "amitié",
+        "joie"
+      ],
+      "emotions": [
+        "joie"
+      ],
+      "themes": [
+        "amitié"
+      ],
+      "choices": [],
+      "history": [
+        {
+          "created_at": "2026-03-04T20:57:25",
+          "title": "L'Aventure du Petit Renard dans la Forêt Magique",
+          "age_group": "4-6",
+          "emotion": "joie",
+          "theme": "amitié",
+          "n_scenes": 4,
+          "target_words": [
+            "partage",
+            "amitié",
+            "joie"
+          ]
+        },
+        {
+          "created_at": "2026-03-04T21:13:52",
+          "title": "L'Ami Renard dans la Forêt Magique",
+          "age_group": "4-6",
+          "emotion": "joie",
+          "theme": "amitié",
+          "n_scenes": 4,
+          "target_words": [
+            "partage",
+            "amitié",
+            "joie"
+          ]
+        }
+      ],
+      "updated_at": "2026-03-04T21:13:52"
+    }
+  }
+}
