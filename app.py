@@ -1,4 +1,5 @@
 import os
+import json
 from dotenv import load_dotenv
 import streamlit as st
 
@@ -10,6 +11,7 @@ from story.image_generator import generate_image
 from story.storage import ensure_dirs, save_json
 from story.export_pdf import export_story_to_pdf
 from story.progress_store import update_after_story, update_after_choice
+from story.groq_client import get_groq_client
 
 
 # ---------------------------
@@ -41,6 +43,137 @@ def is_bad_image(path: str) -> bool:
 
 
 # ---------------------------
+# Traduction via Groq (AJOUT)
+# ---------------------------
+LANG_UI_TO_NAME = {
+    "fr": "French",
+    "en": "English",
+    "es": "Spanish",
+    "it": "Italian",
+    "zh-CN": "Chinese (Simplified)",
+    "ar": "Arabic",
+}
+ALLOWED_LANGS = set(LANG_UI_TO_NAME.keys())
+
+
+def _safe_json_loads(s: str):
+    try:
+        return json.loads(s)
+    except Exception:
+        return None
+
+
+def translate_texts_batch(texts, target_lang_code: str):
+    if target_lang_code == "fr":
+        return texts
+
+    target_name = LANG_UI_TO_NAME.get(target_lang_code, "English")
+    try:
+        client = get_groq_client()
+        model_name = os.getenv("GROQ_MODEL_TRANSLATE", os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"))
+
+        payload = {"target_language": target_name, "texts": texts}
+
+        system = (
+            "You are a strict translation engine.\n"
+            "Return ONLY valid JSON, with NO extra text.\n"
+            "Rules:\n"
+            "- Output must be a JSON array of strings, same length as input.\n"
+            "- Preserve line breaks.\n"
+            "- Do not add explanations.\n"
+        )
+        user = (
+            "Translate the following JSON payload.\n"
+            "Return ONLY the JSON array of translated strings.\n\n"
+            f"PAYLOAD:\n{json.dumps(payload, ensure_ascii=False)}"
+        )
+
+        completion = client.chat.completions.create(
+            model=model_name,
+            messages=[{"role": "system", "content": system}, {"role": "user", "content": user}],
+            temperature=0.2,
+        )
+
+        raw = completion.choices[0].message.content.strip()
+        data = _safe_json_loads(raw)
+        if isinstance(data, list) and len(data) == len(texts) and all(isinstance(x, str) for x in data):
+            return data
+
+        return texts
+    except Exception:
+        return texts
+
+
+def translate_story_data(story_data: dict, target_lang_code: str) -> dict:
+    """
+    Traduit: title, scenes[].text, scenes[].question, scenes[].choices(list), target_words(list)
+    Ne traduit pas: image_prompt (pour ne pas casser HF)
+    """
+    if not story_data or target_lang_code == "fr":
+        return story_data
+
+    out = dict(story_data)
+    scenes = out.get("scenes", []) or []
+
+    batch = [str(out.get("title", ""))]
+    plan = {"scenes": [], "tw_start": None, "tw_len": 0}
+    cursor = 1
+
+    for i, sc in enumerate(scenes):
+        text = str(sc.get("text", ""))
+        question = str(sc.get("question", "") or "")
+
+        choices = sc.get("choices", []) or []
+        if not isinstance(choices, list):
+            choices = []
+        choices = [str(c) for c in choices if str(c).strip()]
+
+        # (scene_index, text_idx, question_idx, choices_start, choices_len)
+        plan["scenes"].append((i, cursor, cursor + 1, cursor + 2, len(choices)))
+
+        batch.append(text)
+        batch.append(question)
+        batch.extend(choices)
+        cursor += 2 + len(choices)
+
+    target_words = out.get("target_words", []) or []
+    if not isinstance(target_words, list):
+        target_words = []
+    target_words = [str(w) for w in target_words if str(w).strip()]
+    plan["tw_start"] = cursor
+    plan["tw_len"] = len(target_words)
+    batch.extend(target_words)
+
+    translated = translate_texts_batch(batch, target_lang_code)
+
+    out["title"] = translated[0] if translated else out.get("title", "")
+
+    new_scenes = []
+    for (i, t_idx, q_idx, c_start, c_len) in plan["scenes"]:
+        sc0 = dict(scenes[i])
+
+        if t_idx < len(translated):
+            sc0["text"] = translated[t_idx]
+
+        if q_idx < len(translated) and str(translated[q_idx]).strip():
+            sc0["question"] = translated[q_idx]
+
+        if c_len > 0 and c_start + c_len <= len(translated):
+            sc0["choices"] = translated[c_start : c_start + c_len]
+
+        new_scenes.append(sc0)
+
+    out["scenes"] = new_scenes
+
+    tw_start = plan["tw_start"]
+    tw_len = plan["tw_len"]
+    if isinstance(tw_start, int) and tw_len > 0 and tw_start + tw_len <= len(translated):
+        out["target_words"] = translated[tw_start : tw_start + tw_len]
+
+    return out
+
+
+# ---------------------------
 # Setup
 # ---------------------------
 load_dotenv()
@@ -48,7 +181,7 @@ ensure_dirs()
 st.set_page_config(page_title="StoryGrow", layout="wide")
 
 # ---------------------------
-# CSS (FINAL)
+# CSS (FINAL) - ORIGINAL INCHANGÉ
 # ---------------------------
 st.markdown(
     r"""
@@ -279,7 +412,39 @@ section[data-testid="stSidebar"] a[href*="2_Dashboard_Parents.py"]:hover{
 )
 
 # ---------------------------
-# Header
+# AJOUT CSS DRAPEAUX (NE CHANGE PAS TON UI)
+# ---------------------------
+st.markdown(
+    """
+<style>
+.sg-langbar{
+  position: fixed;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 999999;
+}
+.sg-langbtn{
+  font-size: 26px;
+  text-decoration: none !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 6px 8px;
+  border-radius: 10px;
+  line-height: 1;
+}
+.sg-langbtn:hover{ filter: brightness(0.95); }
+.sg-langbtn.active{ outline: 2px solid rgba(0,0,0,0.15); }
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
+# ---------------------------
+# Header (ORIGINAL)
 # ---------------------------
 st.markdown(
     """
@@ -302,7 +467,7 @@ st.markdown(
 )
 
 # ---------------------------
-# Session state
+# Session state (ORIGINAL + AJOUT)
 # ---------------------------
 if "story_data" not in st.session_state:
     st.session_state.story_data = None
@@ -311,8 +476,39 @@ if "scene_index" not in st.session_state:
 if "child_choices" not in st.session_state:
     st.session_state.child_choices = []
 
+# AJOUT: langue + cache
+if "ui_lang" not in st.session_state:
+    st.session_state.ui_lang = "fr"
+if "translated_cache" not in st.session_state:
+    st.session_state.translated_cache = {}
+
 # ---------------------------
-# Sidebar
+# Lire la langue depuis URL ?lang=xx (AJOUT)
+# ---------------------------
+try:
+    lang_q = st.query_params.get("lang", None)
+    if isinstance(lang_q, list):
+        lang_q = lang_q[0] if lang_q else None
+except Exception:
+    q = st.experimental_get_query_params()
+    lang_q = q.get("lang", [None])[0]
+
+if lang_q in ALLOWED_LANGS:
+    st.session_state.ui_lang = lang_q
+
+# ---------------------------
+# Afficher les drapeaux (AJOUT)
+# ---------------------------
+FLAGS = [("🇫🇷", "fr"), ("🇬🇧", "en"), ("🇪🇸", "es"), ("🇮🇹", "it"), ("🇨🇳", "zh-CN"), ("🇸🇦", "ar")]
+html = '<div class="sg-langbar">'
+for flag, code in FLAGS:
+    cls = "sg-langbtn active" if st.session_state.ui_lang == code else "sg-langbtn"
+    html += f'<a class="{cls}" href="?lang={code}">{flag}</a>'
+html += "</div>"
+st.markdown(html, unsafe_allow_html=True)
+
+# ---------------------------
+# Sidebar (ORIGINAL)
 # ---------------------------
 profile = load_profile()
 
@@ -379,7 +575,7 @@ with st.sidebar:
     n_scenes = st.slider("Scènes", 3, 6, 4)
 
 # ---------------------------
-# Boutons centrés
+# Boutons centrés (ORIGINAL)
 # ---------------------------
 st.markdown("<div style='height:6px'></div>", unsafe_allow_html=True)
 b1, b2 = st.columns([1, 1], gap="large")
@@ -395,7 +591,7 @@ with b2:
 st.divider()
 
 # ---------------------------
-# Actions
+# Actions (ORIGINAL + reset cache traduction)
 # ---------------------------
 if create_clicked:
     with st.spinner("Génération de l’histoire..."):
@@ -410,6 +606,10 @@ if create_clicked:
         )
         st.session_state.story_data = story.model_dump()
         save_json(st.session_state.story_data, "outputs/json/last_story.json")
+
+        # AJOUT: reset cache quand nouvelle histoire
+        st.session_state.translated_cache = {}
+
         update_after_story(
             child_profile=profile.model_dump(),
             story_data=st.session_state.story_data,
@@ -422,19 +622,35 @@ if reset_clicked:
     st.session_state.story_data = None
     st.session_state.scene_index = 0
     st.session_state.child_choices = []
+
+    # AJOUT
+    st.session_state.translated_cache = {}
+
     st.success("Réinitialisé")
 
-# Export PDF + lien parents
+# Export PDF + lien parents (ORIGINAL + PDF dans la langue affichée)
 if st.session_state.story_data:
     exp_col1, exp_col2, exp_col3 = st.columns([1, 1, 1])
     with exp_col2:
         if st.button("Exporter PDF", use_container_width=True):
+            lang = st.session_state.ui_lang
+            base = st.session_state.story_data
+
+            if lang == "fr":
+                export_data = base
+            else:
+                if lang not in st.session_state.translated_cache:
+                    with st.spinner("Traduction..."):
+                        st.session_state.translated_cache[lang] = translate_story_data(base, lang)
+                export_data = st.session_state.translated_cache[lang]
+
             scenes_for_pdf = []
-            for sc in st.session_state.story_data["scenes"]:
+            for sc in export_data["scenes"]:
                 img_path = f"outputs/images/scene_{sc['scene_no']}.png"
                 scenes_for_pdf.append({"scene_no": sc["scene_no"], "text": sc["text"], "image_path": img_path})
+
             pdf_path = "outputs/pdf/storygrow.pdf"
-            export_story_to_pdf(st.session_state.story_data["title"], scenes_for_pdf, pdf_path)
+            export_story_to_pdf(export_data["title"], scenes_for_pdf, pdf_path)
             st.download_button(
                 label="Télécharger le PDF",
                 data=open(pdf_path, "rb").read(),
@@ -449,10 +665,12 @@ if st.session_state.story_data:
             st.info("Page Parents: crée le fichier pages/2_Dashboard_Parents.py")
 
 # ---------------------------
-# Contenu
+# Contenu (ORIGINAL + data traduit selon langue)
 # ---------------------------
-data = st.session_state.story_data
-if not data:
+base_data = st.session_state.story_data
+lang = st.session_state.ui_lang
+
+if not base_data:
     st.markdown(
         """
 <div class="sg-card">
@@ -465,6 +683,14 @@ if not data:
         unsafe_allow_html=True,
     )
     st.stop()
+
+if lang == "fr":
+    data = base_data
+else:
+    if lang not in st.session_state.translated_cache:
+        with st.spinner("Traduction..."):
+            st.session_state.translated_cache[lang] = translate_story_data(base_data, lang)
+    data = st.session_state.translated_cache[lang]
 
 scenes = data["scenes"]
 total = len(scenes)
@@ -511,10 +737,15 @@ with left:
     st.markdown("<div class='sg-card'><h3 style='margin:0; color:#111827;'>Texte</h3></div>", unsafe_allow_html=True)
     st.markdown(f"<div class='sg-story'>{text}</div>", unsafe_allow_html=True)
 
-    audio_path = f"outputs/audio/scene_{scene_no}.mp3"
+    # AUDIO (AJOUT): par langue
+    audio_dir = os.path.join("outputs", "audio", lang)
+    os.makedirs(audio_dir, exist_ok=True)
+    audio_path = os.path.join(audio_dir, f"scene_{scene_no}.mp3")
+
     if not os.path.exists(audio_path):
         with st.spinner("Création audio..."):
-            text_to_mp3(text, audio_path, lang="fr")
+            text_to_mp3(text, audio_path, lang=lang)
+
     st.audio(audio_path)
 
 with right:
@@ -571,9 +802,11 @@ choices = normalize_choices(choices_raw)
 
 if question and len(choices) >= 2:
     st.markdown(f"<p style='color:#111827; font-weight:bold; font-size:25px'>{question}</p>", unsafe_allow_html=True)
-    choice = st.radio("Sélection :", choices[:2], key=f"choice_{scene_no}")
 
-    if st.button("Valider", key=f"btn_{scene_no}"):
+    # AJOUT: key dépend de la langue pour éviter erreurs si on change de langue
+    choice = st.radio("Sélection :", choices[:2], key=f"choice_{lang}_{scene_no}")
+
+    if st.button("Valider", key=f"btn_{lang}_{scene_no}"):
         st.session_state.child_choices.append({"scene_no": scene_no, "choice": choice})
         st.markdown(
             """
@@ -596,6 +829,7 @@ elif question:
     st.info("Aucun choix détecté pour cette scène (format inattendu).")
 
 with st.expander("Debug (optionnel)"):
+    st.write("Langue :", lang)
     st.write("Mots cibles :", data.get("target_words", []))
     st.write("Choix enregistrés :", st.session_state.child_choices)
     st.code(image_prompt)

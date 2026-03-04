@@ -13,12 +13,16 @@
         ],
         "pedagogy_goal": "partage"
       },
-      "stories_count": 3,
+      "stories_count": 5,
       "words_learned": [
         "partage",
         "amitié",
         "joie",
-        "partager"
+        "partager",
+        "amis",
+        "joyeux",
+        "ami",
+        "heureux"
       ],
       "emotions": [
         "joie"
@@ -66,9 +70,35 @@
             "amitié",
             "joie"
           ]
+        },
+        {
+          "created_at": "2026-03-05T00:15:50",
+          "title": "L'Ami du Petit Renard",
+          "age_group": "4-6",
+          "emotion": "joie",
+          "theme": "amitié",
+          "n_scenes": 4,
+          "target_words": [
+            "amis",
+            "partager",
+            "joyeux"
+          ]
+        },
+        {
+          "created_at": "2026-03-05T00:15:59",
+          "title": "L'Ami Renard",
+          "age_group": "4-6",
+          "emotion": "joie",
+          "theme": "amitié",
+          "n_scenes": 4,
+          "target_words": [
+            "partager",
+            "ami",
+            "heureux"
+          ]
         }
       ],
-      "updated_at": "2026-03-04T22:54:53"
+      "updated_at": "2026-03-05T00:15:59"
     }
   }
 }

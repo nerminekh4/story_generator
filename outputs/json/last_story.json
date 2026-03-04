@@ -4,42 +4,42 @@
   "scenes": [
     {
       "scene_no": 1,
-      "text": "Dans une forêt magique, il y a un petit renard nommé Roux. Roux est très joyeux et aime jouer avec ses amis. Un jour, il trouve un beau ballon rouge. Roux est très heureux et veut partager son ballon avec ses amis. Il court vers la clairière pour les retrouver. Roux voit ses amis et leur montre son ballon. Ses amis sont très contents de voir Roux et son ballon. Ils veulent tous jouer avec le ballon. Roux est très généreux et veut partager son ballon avec tous ses amis. Il commence à jouer avec eux. Le ballon rouge vole très haut dans le ciel. Roux et ses amis rient et courent après le ballon. Le soleil brille et les oiseaux chantent. La forêt est remplie de joie et d'amitié. Roux est très heureux de partager son ballon avec ses amis. Il répète souvent : 'Partager, c'est partager.'",
-      "image_prompt": "Un petit renard roux avec un ballon rouge dans une clairière ensoleillée, entouré d'animaux de la forêt",
+      "text": "Il était une fois, dans une forêt magique, un petit renard nommé Roux. Roux aimait jouer avec ses amis. Il courait, sautait et riait. Roux était très heureux. Il aimait la forêt magique. La forêt était pleine de fleurs colorées et d'arbres hauts. Roux se sentait en sécurité. Il avait des amis qui l'aimaient. Roux aimait partager ses jouets avec ses amis. Il aimait voir ses amis sourire. Roux était un petit renard très gentil. Il aimait aider ses amis. Roux était très fier de ses amis. Il les aimait beaucoup. Roux voulait toujours les rendre heureux. Il faisait tout pour les rendre heureux. Roux était un vrai ami.",
+      "image_prompt": "Un petit renard roux avec un grand sourire, entouré de fleurs colorées et d'arbres hauts, avec des oiseaux volant au-dessus",
       "question": null,
       "choices": []
     },
     {
       "scene_no": 2,
-      "text": "Roux et ses amis jouent longtemps avec le ballon. Ils sont très heureux et font beaucoup de rires. Roux pense que partager son ballon est la meilleure chose à faire. Il voit que ses amis sont très contents de jouer ensemble. Roux répète : 'Partager, c'est partager.' Il veut que ses amis sachent que partager est important. Soudain, un petit lapin perd son jouet préféré. Le lapin est très triste. Roux voit le lapin et veut l'aider. Il propose de partager son ballon avec le lapin. Le lapin est très reconnaissant et remercie Roux. Roux est heureux de voir le lapin sourire à nouveau. Et toi, que ferais-tu si tu voyais un ami triste ?",
-      "image_prompt": "Un petit renard roux avec un ballon rouge et un petit lapin triste dans la clairière",
-      "question": "Et toi, que ferais-tu si tu voyais un ami triste ?",
+      "text": "Un jour, Roux a trouvé un beau ballon rouge. Il était très heureux. Il voulait jouer avec le ballon. Mais il se demandait à qui il pourrait le donner. Roux aimait partager. Il voulait donner le ballon à un de ses amis. Mais il ne savait pas qui. Roux réfléchissait. Il pensait à ses amis. Il se demandait qui serait le plus heureux avec le ballon. Roux aimait rendre ses amis heureux. Il voulait choisir l'ami le plus méritant. Roux était très gentil. Il voulait faire plaisir à son ami.",
+      "image_prompt": "Un petit renard roux tenant un ballon rouge, avec un air réfléchi, entouré de quelques amis qui le regardent",
+      "question": "Et toi, que ferais-tu ?",
       "choices": [
-        "Je partagerais mon jouet avec lui",
-        "Je le laisserais seul"
+        "Donner le ballon à ton meilleur ami",
+        "Donner le ballon à un ami qui n'a pas de jouets"
       ]
     },
     {
       "scene_no": 3,
-      "text": "Roux continue à partager son ballon avec tous ses amis. Il voit que partager rend tout le monde heureux. Les amis de Roux sont très reconnaissants envers lui. Ils veulent aussi partager quelque chose avec Roux. Un oiseau offre à Roux un beau nid pour jouer. Un écureuil offre à Roux des noix délicieuses à manger. Roux est très touché par la gentillesse de ses amis. Il répète : 'Partager, c'est partager.' Roux comprend que partager n'est pas seulement donner, mais aussi recevoir. Il est très heureux de voir que ses amis veulent partager avec lui. La forêt est remplie de joie et d'amitié. Roux et ses amis jouent ensemble, partagent et rient. Le soleil se couche lentement, mais la joie reste dans la forêt. Roux est fatigué mais heureux. Il réfléchit à tout ce qu'il a appris ce jour-là. Et toi, que penses-tu de l'amitié de Roux et de ses amis ?",
-      "image_prompt": "Un petit renard roux avec un nid d'oiseau et des noix, entouré d'animaux de la forêt",
-      "question": "Et toi, que penses-tu de l'amitié de Roux et de ses amis ?",
-      "choices": [
-        "C'est très belle",
-        "C'est ordinaire"
-      ]
+      "text": "Roux a décidé de donner le ballon à un de ses amis qui n'avait pas de jouets. Il s'appelait Léo. Léo était très heureux. Il a remercié Roux. Roux était content de voir Léo sourire. Il était fier de lui-même. Roux avait fait une bonne chose. Il avait rendu Léo heureux. Roux aimait voir ses amis heureux. Il se sentait heureux lui-même. Roux était un vrai ami. Il aimait partager. Il aimait rendre ses amis heureux. Roux était un petit renard très spécial.",
+      "image_prompt": "Un petit renard roux donnant un ballon rouge à un autre animal, avec un grand sourire, entouré de fleurs colorées",
+      "question": null,
+      "choices": []
     },
     {
       "scene_no": 4,
-      "text": "Roux se couche dans son lit de feuilles, très fatigué mais très heureux. Il pense à tout ce qu'il a vécu ce jour-là. Il a partagé son ballon avec ses amis, et ils ont partagé avec lui. Roux comprend que l'amitié est très importante. Il répète : 'Partager, c'est partager.' Roux sourit en pensant à ses amis et à tout ce qu'ils ont partagé. Il se sent très chanceux d'avoir de tels amis. La forêt est silencieuse, mais Roux sait que demain, il pourra à nouveau jouer et partager avec ses amis. Roux ferme les yeux et s'endort, avec un cœur plein de joie et d'amitié. Le lendemain, Roux se réveille et court vers la clairière pour retrouver ses amis. Ils jouent à nouveau ensemble, partagent et rient. La forêt est à nouveau remplie de joie et d'amitié. Roux est très heureux de voir que l'amitié et le partage sont toujours présents.",
-      "image_prompt": "Un petit renard roux dormant dans son lit de feuilles, avec un ballon rouge à côté de lui",
-      "question": null,
-      "choices": []
+      "text": "Roux et Léo ont joué ensemble avec le ballon. Ils ont couru, sauté et riaient. Roux était très heureux. Il aimait jouer avec ses amis. Il aimait partager. Roux était un petit renard très gentil. Il aimait rendre ses amis heureux. Roux était fier de lui-même. Il avait fait une bonne chose. Il avait rendu Léo heureux. Roux aimait la forêt magique. Il aimait ses amis. Roux était un vrai ami. Et toi, que ferais-tu pour rendre tes amis heureux ?",
+      "image_prompt": "Un petit renard roux et un autre animal jouant avec un ballon rouge, entourés de fleurs colorées et d'arbres hauts",
+      "question": "Et toi, que ferais-tu pour rendre tes amis heureux ?",
+      "choices": [
+        "Je partagerais mes jouets avec eux",
+        "Je leur offrirais des fleurs"
+      ]
     }
   ],
   "target_words": [
     "partager",
-    "amitié",
-    "joie"
+    "ami",
+    "heureux"
   ]
 }

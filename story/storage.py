@@ -4,6 +4,7 @@ from typing import Any, Dict
 
 
 def ensure_dirs() -> None:
+    # Dossiers de base
     folders = [
         "outputs",
         "outputs/audio",
@@ -11,6 +12,11 @@ def ensure_dirs() -> None:
         "outputs/pdf",
         "outputs/json",
     ]
+
+    # Sous-dossiers audio par langue (gTTS)
+    audio_langs = ["fr", "en", "es", "it", "zh-CN", "ar"]
+    folders += [os.path.join("outputs", "audio", lang) for lang in audio_langs]
+
     for folder in folders:
         if os.path.exists(folder) and not os.path.isdir(folder):
             raise RuntimeError(f"{folder} existe mais ce n'est pas un dossier.")
