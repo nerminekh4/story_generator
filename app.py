@@ -11,62 +11,59 @@ from story.storage import ensure_dirs, save_json
 from story.export_pdf import export_story_to_pdf
 from story.progress_store import update_after_story, update_after_choice
 
+
+# ---------------------------
+# Helpers UI: placeholders FR (compatibles anciennes versions)
+# ---------------------------
+def selectbox_fr(label, options, index=0, key=None):
+    try:
+        return st.selectbox(label, options, index=index, key=key, placeholder="Choisir…")
+    except TypeError:
+        return st.selectbox(label, options, index=index, key=key)
+
+
+def multiselect_fr(label, options, default=None, key=None):
+    if default is None:
+        default = []
+    try:
+        return st.multiselect(label, options, default=default, key=key, placeholder="Choisir…")
+    except TypeError:
+        return st.multiselect(label, options, default=default, key=key)
+
+
 def is_bad_image(path: str) -> bool:
     if not os.path.exists(path):
         return True
     try:
-        return os.path.getsize(path) < 2000  
+        return os.path.getsize(path) < 2000
     except OSError:
         return True
 
 
-def safe_generate_and_show_image(image_prompt: str, img_path: str, child_profile: dict):
-    """
-    - supprime une image cassée
-    - tente de générer
-    - affiche l'image si OK sinon affiche l'erreur
-    """
-    # si image cassée, on supprime pour forcer la régénération
-    if is_bad_image(img_path) and os.path.exists(img_path):
-        try:
-            os.remove(img_path)
-        except OSError:
-            pass
-
-    # si pas d'image, on génère
-    if not os.path.exists(img_path):
-        try:
-            generate_image(image_prompt, img_path, child_profile=child_profile)
-        except Exception as e:
-            st.error("Erreur génération image (Hugging Face).")
-            st.code(str(e))
-            return
-
-    # si toujours cassée -> message clair
-    if is_bad_image(img_path):
-        st.error("Image non générée (fichier vide ou invalide).")
-        return
-
-    # sinon affiche
-    st.image(img_path, use_column_width=True)
-
-    
 # ---------------------------
 # Setup
 # ---------------------------
 load_dotenv()
 ensure_dirs()
-
 st.set_page_config(page_title="StoryGrow", layout="wide")
 
 # ---------------------------
-# CSS (style demandé) + FIX sidebar input text + FIX boutons centrés
+# CSS (FINAL)
 # ---------------------------
 st.markdown(
-    """
+    r"""
 <style>
+/* =========================
+   0) Enlever la barre noire du haut + footer
+   ========================= */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+div[data-testid="stToolbar"] {display:none !important;}
+div[data-testid="stHeader"] {display:none !important;}
+
 /* =========
-   PAGE BACKGROUND: blanc + petites étoiles
+   BACKGROUND étoiles
    ========= */
 .stApp {
   background-color: #ffffff;
@@ -74,8 +71,6 @@ st.markdown(
   background-repeat: repeat;
   background-size: 220px 220px;
 }
-
-/* Container */
 .main .block-container {
   max-width: 1120px;
   padding-top: 0.8rem;
@@ -83,14 +78,9 @@ st.markdown(
 }
 
 /* =========
-   HEADER centré
+   HEADER
    ========= */
-.sg-hero {
-  margin: 10px 0 10px 0;
-  text-align: center;
-  padding: 10px 10px;
-}
-
+.sg-hero { margin: 10px 0; text-align: center; padding: 10px; }
 .sg-title {
   font-family: ui-rounded, "SF Pro Rounded", "Avenir Next", system-ui;
   font-weight: 900;
@@ -99,15 +89,7 @@ st.markdown(
   font-size: 56px;
   line-height: 1.0;
 }
-
-.sg-subtitle {
-  margin: 10px 0 0 0;
-  font-size: 16px;
-  color: #1f2937;
-  font-weight: 650;
-}
-
-/* lettres colorées assorties */
+.sg-subtitle { margin-top: 10px; font-size: 16px; color: #1f2937; font-weight: 650; }
 .sg-letter { display: inline-block; }
 .sg-c1 { color: #ff4d6d; }
 .sg-c2 { color: #ff7a59; }
@@ -118,82 +100,135 @@ st.markdown(
 .sg-c7 { color: #7c4dff; }
 
 /* =========
-   SIDEBAR bleu clair + labels rouges + texte blanc
+   SIDEBAR
    ========= */
 section[data-testid="stSidebar"] > div {
   background: #5db7ff;
   color: #ffffff;
 }
 
+/* cacher la nav auto multipage "app / Dashboard Parents" */
+section[data-testid="stSidebar"] div[data-testid="stSidebarNav"] { display:none !important; }
+
+/* titres sidebar */
 section[data-testid="stSidebar"] h1,
 section[data-testid="stSidebar"] h2,
-section[data-testid="stSidebar"] h3 {
-  color: #ffffff !important;
-}
+section[data-testid="stSidebar"] h3 { color:#ffffff !important; }
 
 /* labels en rouge */
 section[data-testid="stSidebar"] label {
-  color: #ff1f4b !important;
+  color:#ff1f4b !important;
   font-weight: 850 !important;
 }
 
-/* textes hors champs en blanc */
+/* texte hors widgets */
 section[data-testid="stSidebar"] .stMarkdown,
 section[data-testid="stSidebar"] p,
-section[data-testid="stSidebar"] span {
-  color: #ffffff !important;
+section[data-testid="stSidebar"] small,
+section[data-testid="stSidebar"] .stCaption {
+  color:#ffffff !important;
 }
 
-/* inputs: fond clair + arrondi */
+/* =========================
+   ✅ Widgets: fond clair + texte noir + bordure blanche
+   ========================= */
+
+/* input/textarea */
 section[data-testid="stSidebar"] input,
 section[data-testid="stSidebar"] textarea {
   background: rgba(255,255,255,0.92) !important;
-  border-radius: 12px !important;
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  color: #111827 !important;
 }
 
-/* selectbox (zone) */
-section[data-testid="stSidebar"] div[data-baseweb="select"] > div {
+/* ✅ Bordure blanche (wrappers BaseWeb) */
+section[data-testid="stSidebar"] div[data-baseweb="base-input"] > div,
+section[data-testid="stSidebar"] div[data-baseweb="input"] > div,
+section[data-testid="stSidebar"] div[data-baseweb="textarea"] > div {
   background: rgba(255,255,255,0.92) !important;
-  border-radius: 12px !important;
+  border: 2px solid rgba(255,255,255,0.95) !important;
+  border-radius: 14px !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
-/* =========
-   FIX #1: texte à l'intérieur des cases toujours lisible (noir/gris foncé)
-   -> on ne touche PAS aux labels dehors (blanc/rouge)
-   ========= */
-section[data-testid="stSidebar"] input,
-section[data-testid="stSidebar"] textarea,
+/* ✅ Fix spécial Streamlit pour les contours noirs des text_input (Prénom / Personnage / Lieu) */
+section[data-testid="stSidebar"] .stTextInput > div,
+section[data-testid="stSidebar"] .stTextInput > div > div,
+section[data-testid="stSidebar"] .stTextInput div[data-baseweb="base-input"] > div {
+  border: 2px solid rgba(255,255,255,0.95) !important;
+  border-radius: 14px !important;
+  box-shadow: none !important;      /* enlève l’ombre noire */
+  outline: none !important;
+  background: rgba(255,255,255,0.92) !important;
+}
+
+/* select/multiselect */
+section[data-testid="stSidebar"] div[data-baseweb="select"] > div,
+section[data-testid="stSidebar"] [role="combobox"] {
+  background: rgba(255,255,255,0.92) !important;
+  border: 2px solid rgba(255,255,255,0.95) !important;
+  border-radius: 14px !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* texte DANS select/multiselect en noir */
 section[data-testid="stSidebar"] div[data-baseweb="select"] * ,
-section[data-testid="stSidebar"] div[data-baseweb="tag"] {
-  color: #111827 !important;   /* texte dans les champs */
+section[data-testid="stSidebar"] [role="combobox"] * {
+  color: #111827 !important;
 }
 
-/* placeholder dans les champs */
+/* placeholder visible */
 section[data-testid="stSidebar"] input::placeholder,
 section[data-testid="stSidebar"] textarea::placeholder {
-  color: rgba(17,24,39,0.55) !important;
+  color: rgba(17,24,39,0.65) !important;
+  font-weight: 600 !important;
 }
 
-/* Tags du multiselect (chips) : texte blanc dedans, mais lisible */
+/* menu options */
+div[role="listbox"] { background:#ffffff !important; border:1px solid rgba(0,0,0,0.10) !important; }
+div[role="option"] * { color:#111827 !important; }
+
+/* =========================
+   ✅ Chips multiselect : rouge + texte NOIR PAS GRAS
+   ========================= */
 section[data-testid="stSidebar"] span[data-baseweb="tag"] {
-  color: #ffffff !important;
   background: #ff1f4b !important;
+  color: #111827 !important;
+  font-weight: 500 !important;   /* ✅ plus en gras */
   border: 0 !important;
 }
 section[data-testid="stSidebar"] span[data-baseweb="tag"] svg {
-  fill: #ffffff !important;
+  fill: #111827 !important;
 }
 
-/* =========
-   Buttons
-   ========= */
+/* =========================
+   ✅ Focus : bordure blanche (pas de ring noir)
+   ========================= */
+section[data-testid="stSidebar"] div[data-baseweb="base-input"] > div:focus-within,
+section[data-testid="stSidebar"] div[data-baseweb="input"] > div:focus-within,
+section[data-testid="stSidebar"] div[data-baseweb="textarea"] > div:focus-within,
+section[data-testid="stSidebar"] div[data-baseweb="select"] > div:focus-within,
+section[data-testid="stSidebar"] [role="combobox"]:focus-within,
+section[data-testid="stSidebar"] .stTextInput > div:focus-within,
+section[data-testid="stSidebar"] .stTextInput > div > div:focus-within {
+  border: 2px solid rgba(255,255,255,1) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* =========================
+   ✅ Boutons rouges (tous)
+   ========================= */
 .stButton > button {
   border-radius: 14px !important;
   font-weight: 900 !important;
   padding: 10px 14px !important;
 }
-
-div[data-testid="stButton"] > button[kind="primary"]{
+div[data-testid="stButton"] > button{
   background: #ff1f4b !important;
   border: 0 !important;
   color: white !important;
@@ -208,8 +243,6 @@ div[data-testid="stButton"] > button[kind="primary"]{
   box-shadow: 0 10px 22px rgba(0,0,0,0.06);
   margin-bottom: 14px;
 }
-
-/* Story text */
 .sg-story {
   border: 1px solid rgba(0,0,0,0.10);
   border-radius: 16px;
@@ -219,42 +252,34 @@ div[data-testid="stButton"] > button[kind="primary"]{
   font-size: 1.05rem;
   line-height: 1.65;
 }
+div[data-testid="stProgress"] > div > div { border-radius: 999px !important; }
 
-/* Progress bar arrondie */
-div[data-testid="stProgress"] > div > div {
-  border-radius: 999px !important;
+/* nav buttons */
+section[data-testid="stSidebar"] a[href*="app.py"],
+section[data-testid="stSidebar"] a[href*="2_Dashboard_Parents.py"]{
+  display: block;
+  text-decoration: none !important;
+  text-align: center;
+  padding: 12px 12px;
+  border: 2px solid rgba(255,255,255,0.95);
+  border-radius: 16px;
+  font-weight: 900;
+  font-size: 18px;
+  color: #ffffff !important;
+  background: transparent;
+  margin-bottom: 12px;
 }
-
-/* ===============================
-   FIX RADIO CHOICES VISIBILITY
-   =============================== */
-   
-/* Texte "Sélection :" */
-div[data-testid="stRadio"] > label {
-  color: #111827 !important;
-  font-size:18px;
+section[data-testid="stSidebar"] a[href*="app.py"]:hover,
+section[data-testid="stSidebar"] a[href*="2_Dashboard_Parents.py"]:hover{
+  background: rgba(255,255,255,0.15);
 }
-
-/* Texte des options radio */
-div[role="radiogroup"] > label {
-  color: #111827 !important;
-  font-size:14px;
-}
-
-/* Cercle sélectionné (petite pastille) */
-div[role="radiogroup"] div {
-  color: #111827 !important;
-  border-color: #ff1f4b !important;
-}
-
-
 </style>
 """,
     unsafe_allow_html=True,
 )
 
 # ---------------------------
-# Header centré (multicolore)
+# Header
 # ---------------------------
 st.markdown(
     """
@@ -287,37 +312,45 @@ if "child_choices" not in st.session_state:
     st.session_state.child_choices = []
 
 # ---------------------------
-# Sidebar: Profil + paramètres histoire
+# Sidebar
 # ---------------------------
 profile = load_profile()
 
 with st.sidebar:
+    st.markdown("### Navigation")
+    try:
+        st.page_link("app.py", label="Page principale", use_container_width=True)
+        st.page_link("pages/2_Dashboard_Parents.py", label="Dashboard Parents", use_container_width=True)
+    except Exception:
+        st.info("Navigation: vérifie que pages/2_Dashboard_Parents.py existe.")
+    st.divider()
+
     st.subheader("Profil enfant")
 
     child_name = st.text_input("Prénom", profile.name)
     child_age = st.slider("Âge", 3, 12, profile.age)
 
     reading_levels = ["débutant", "moyen", "avancé"]
-    reading_level = st.selectbox(
+    reading_level = selectbox_fr(
         "Niveau de lecture",
         reading_levels,
         index=reading_levels.index(profile.reading_level) if profile.reading_level in reading_levels else 0,
     )
 
-    interests = st.multiselect(
+    interests = multiselect_fr(
         "Centres d’intérêt",
         ["animaux", "espace", "dinosaures", "magie", "sport", "musique"],
         default=profile.interests,
     )
 
-    difficulties = st.multiselect(
+    difficulties = multiselect_fr(
         "Besoins (optionnel)",
         ["dyslexie", "attention", "timidité", "peur_du_noir"],
         default=profile.difficulties,
     )
 
     goals = ["confiance", "gestion_des_emotions", "couleurs", "partage", "calme"]
-    pedagogy_goal = st.selectbox(
+    pedagogy_goal = selectbox_fr(
         "Objectif",
         goals,
         index=goals.index(profile.pedagogy_goal) if profile.pedagogy_goal in goals else 0,
@@ -338,21 +371,21 @@ with st.sidebar:
     st.divider()
 
     st.subheader("Histoire")
-    age_group = st.selectbox("Groupe d’âge", ["4-6", "7-9", "10-12"], index=0)
+    age_group = selectbox_fr("Groupe d’âge", ["4-6", "7-9", "10-12"], index=0)
     character = st.text_input("Personnage", "Un petit renard")
     place = st.text_input("Lieu", "Une forêt magique")
-    emotion = st.selectbox("Émotion", ["joie", "courage", "curiosité", "calme"])
-    theme = st.selectbox("Valeur", ["amitié", "partage", "confiance", "découverte"])
+    emotion = selectbox_fr("Émotion", ["joie", "courage", "curiosité", "calme"], index=0)
+    theme = selectbox_fr("Valeur", ["amitié", "partage", "confiance", "découverte"], index=0)
     n_scenes = st.slider("Scènes", 3, 6, 4)
 
 # ---------------------------
-# FIX #2: Boutons centrés sous le titre
+# Boutons centrés
 # ---------------------------
 st.markdown("<div style='height:6px'></div>", unsafe_allow_html=True)
 b1, b2 = st.columns([1, 1], gap="large")
 with b1:
     st.markdown("<div style='display:flex; justify-content:flex-end;'>", unsafe_allow_html=True)
-    create_clicked = st.button("Créer l’histoire", type="primary", use_container_width=True)
+    create_clicked = st.button("Créer l’histoire", use_container_width=True)
     st.markdown("</div>", unsafe_allow_html=True)
 with b2:
     st.markdown("<div style='display:flex; justify-content:flex-start;'>", unsafe_allow_html=True)
@@ -361,7 +394,9 @@ with b2:
 
 st.divider()
 
+# ---------------------------
 # Actions
+# ---------------------------
 if create_clicked:
     with st.spinner("Génération de l’histoire..."):
         story = generate_story(
@@ -378,12 +413,7 @@ if create_clicked:
         update_after_story(
             child_profile=profile.model_dump(),
             story_data=st.session_state.story_data,
-            meta={
-                "emotion": emotion,
-                "theme": theme,
-                "age_group": age_group,
-                "n_scenes": n_scenes,
-            },
+            meta={"emotion": emotion, "theme": theme, "age_group": age_group, "n_scenes": n_scenes},
         )
         st.session_state.scene_index = 0
         st.session_state.child_choices = []
@@ -394,7 +424,7 @@ if reset_clicked:
     st.session_state.child_choices = []
     st.success("Réinitialisé")
 
-# Export PDF (reste en bas comme avant)
+# Export PDF + lien parents
 if st.session_state.story_data:
     exp_col1, exp_col2, exp_col3 = st.columns([1, 1, 1])
     with exp_col2:
@@ -413,7 +443,6 @@ if st.session_state.story_data:
                 use_container_width=True,
             )
     with exp_col3:
-        # Bouton vers la page parents (multipage Streamlit)
         try:
             st.page_link("pages/2_Dashboard_Parents.py", label="Espace Parents", use_container_width=True)
         except Exception:
@@ -444,7 +473,6 @@ st.session_state.scene_index = idx
 
 st.progress((idx + 1) / total, text=f"Scène {idx+1}/{total}")
 
-# Titre histoire + infos
 st.markdown(
     f"""
 <div class="sg-card">
@@ -457,7 +485,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Navigation
 n1, n2, n3 = st.columns([1, 1, 1])
 with n1:
     if st.button("Précédent", use_container_width=True) and idx > 0:
@@ -478,14 +505,10 @@ scene_no = scene["scene_no"]
 text = scene["text"]
 image_prompt = scene["image_prompt"]
 
-# Layout texte / image
 left, right = st.columns([1.15, 0.85])
 
 with left:
-    st.markdown(
-        "<div class='sg-card'><h3 style='margin:0; color:#111827;'>Texte</h3></div>",
-        unsafe_allow_html=True,
-    )
+    st.markdown("<div class='sg-card'><h3 style='margin:0; color:#111827;'>Texte</h3></div>", unsafe_allow_html=True)
     st.markdown(f"<div class='sg-story'>{text}</div>", unsafe_allow_html=True)
 
     audio_path = f"outputs/audio/scene_{scene_no}.mp3"
@@ -495,10 +518,7 @@ with left:
     st.audio(audio_path)
 
 with right:
-    st.markdown(
-        "<div class='sg-card'><h3 style='margin:0; color:#111827;'>Illustration</h3></div>",
-        unsafe_allow_html=True,
-    )
+    st.markdown("<div class='sg-card'><h3 style='margin:0; color:#111827;'>Illustration</h3></div>", unsafe_allow_html=True)
     img_path = f"outputs/images/scene_{scene_no}.png"
 
     with st.spinner("Génération image..."):
@@ -520,95 +540,61 @@ with right:
     else:
         st.error("Image non générée ou fichier invalide.")
 
-# Choix interactif (si présent)
-# Choix interactif (si présent)
 question = scene.get("question")
+choices_raw = scene.get("choices") or scene.get("options") or scene.get("answers")
 
-# Certaines IA renvoient les choix sous d'autres clés
-choices_raw = scene.get("choices")
-if choices_raw is None:
-    choices_raw = scene.get("options")
-if choices_raw is None:
-    choices_raw = scene.get("answers")
 
 def normalize_choices(x):
-    # 1) Liste déjà OK
     if isinstance(x, list):
-        out = []
-        for item in x:
-            s = str(item).strip()
-            if s:
-                out.append(s)
-        return out
-
-    # 2) String: on extrait les lignes comme choix
+        return [str(i).strip() for i in x if str(i).strip()]
     if isinstance(x, str):
         lines = []
         for line in x.splitlines():
             s = line.strip()
             if not s:
                 continue
-            # supprime les préfixes "A)", "B)", "-", "•", "1."
             s = s.lstrip("-• \t")
-            s = s.replace("A)", "").replace("B)", "").replace("C)", "").replace("D)", "")
+            for p in ["A)", "B)", "C)", "D)"]:
+                s = s.replace(p, "")
             s = s.strip()
             if s:
                 lines.append(s)
-        # parfois c’est séparé par ";"
         if len(lines) < 2 and ";" in x:
             parts = [p.strip() for p in x.split(";") if p.strip()]
             if len(parts) >= 2:
                 return parts
         return lines
-
-    # 3) Autres types -> vide
     return []
+
 
 choices = normalize_choices(choices_raw)
 
 if question and len(choices) >= 2:
-    st.markdown(
-        f"<p style='color:#111827; font-weight:bold; font-size:25px'>{question}</p>",
-        unsafe_allow_html=True,
-    )
-    
+    st.markdown(f"<p style='color:#111827; font-weight:bold; font-size:25px'>{question}</p>", unsafe_allow_html=True)
     choice = st.radio("Sélection :", choices[:2], key=f"choice_{scene_no}")
 
     if st.button("Valider", key=f"btn_{scene_no}"):
         st.session_state.child_choices.append({"scene_no": scene_no, "choice": choice})
         st.markdown(
-    """
-    <div style="
-        background-color:#fff4cc;
-        color:#111827;
-        padding:10px;
-        border-radius:12px;
-        font-weight:700;
-        text-align:center;
-        border:1px solid #ffd166;
-    ">
-        🌟 Bravo ! Super choix ! 🌟
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+            """
+<div style="background-color:#fff4cc;color:#111827;padding:10px;border-radius:12px;font-weight:700;text-align:center;border:1px solid #ffd166;">
+  🌟 Bravo ! Super choix ! 🌟
+</div>
+""",
+            unsafe_allow_html=True,
+        )
         update_after_choice(
-    child_profile=profile.model_dump(),
-    scene_no=scene_no,
-    question=question,
-    choice=choice,
-)
-        
+            child_profile=profile.model_dump(),
+            scene_no=scene_no,
+            question=question,
+            choice=choice,
+        )
+
 elif question:
-    # Si question présente mais pas de choix exploitables
-    st.markdown(
-        "<div class='sg-card'><h3 style='margin:0; color:#111827;'>Choix</h3></div>",
-        unsafe_allow_html=True,
-    )
+    st.markdown("<div class='sg-card'><h3 style='margin:0; color:#111827;'>Choix</h3></div>", unsafe_allow_html=True)
     st.write(question)
     st.info("Aucun choix détecté pour cette scène (format inattendu).")
 
-# Debug (optionnel)
 with st.expander("Debug (optionnel)"):
     st.write("Mots cibles :", data.get("target_words", []))
     st.write("Choix enregistrés :", st.session_state.child_choices)
