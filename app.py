@@ -580,17 +580,17 @@ with st.sidebar:
 
     interests = multiselect_fr(
         "Centres d’intérêt",
-        ["animaux", "espace", "dinosaures", "magie", "sport", "musique"],
+        ["animaux", "espace", "dinosaures", "magie", "sport", "musique","robots","princesses","chevaliers","pirates"],
         default=profile.interests,
     )
 
     difficulties = multiselect_fr(
         "Besoins (optionnel)",
-        ["dyslexie", "attention", "timidité", "peur_du_noir"],
+        ["dyslexie", "attention", "timidité", "peur du noir","impulsivité","difficulté à dormir","peur de la séparation"],
         default=profile.difficulties,
     )
 
-    goals = ["confiance", "gestion_des_emotions", "couleurs", "partage", "calme"]
+    goals = ["confiance en soi", "gestion des emotions", "couleurs", "partage", "calme","écoute","autonomie","gratitude","concentration"]
     pedagogy_goal = selectbox_fr(
         "Objectif",
         goals,
