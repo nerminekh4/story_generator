@@ -1,8 +1,14 @@
 {
-  "name": "",
-  "age": 3,
-  "reading_level": "avancé",
-  "interests": [],
-  "difficulties": [],
-  "pedagogy_goal": "partage"
+  "name": "hakim",
+  "age": 6,
+  "reading_level": "moyen",
+  "interests": [
+    "magie",
+    "espace"
+  ],
+  "difficulties": [
+    "peur de la séparation",
+    "peur du noir"
+  ],
+  "pedagogy_goal": "calme"
 }

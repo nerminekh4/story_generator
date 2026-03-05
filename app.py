@@ -499,6 +499,23 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+
+st.markdown(
+    """
+<style>
+/* Choix interactifs (st.radio) : texte NOIR */
+div[data-testid="stRadio"] label,
+div[data-testid="stRadio"] label span,
+div[data-testid="stRadio"] p,
+div[data-testid="stRadio"] div {
+  color: #111827 !important;
+  font-weight: 700 !important; /* enlève si tu veux garder le poids par défaut */
+}
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
 # ---------------------------
 # Session state (ORIGINAL + AJOUT)
 # ---------------------------

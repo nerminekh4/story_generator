@@ -1,48 +1,48 @@
 {
-  "title": "L'Aventure du Petit Renard dans la Forêt Magique",
+  "title": "L'aventure spatiale de Robi",
   "age_group": "4-6",
   "scenes": [
     {
       "scene_no": 1,
-      "text": "Dans une forêt magique, il y avait un petit renard nommé Roux. Roux aimait jouer avec ses amis dans la forêt. Un jour, il trouva un chemin qu'il n'avait jamais vu avant. Le chemin était bordé de fleurs colorées et de petits cailloux brillants. Roux était très curieux et décida de suivre le chemin pour voir où il menait. Il marcha pendant un moment, et le chemin devint de plus en plus étroit. Roux entendit le bruit d'un ruisseau et vit un petit pont en bois. Il traversa le pont et arriva dans une clairière. Dans la clairière, il y avait un grand arbre avec des branches qui formaient un abri. Roux se sentit en sécurité et décida de s'asseoir sous l'arbre pour se reposer. Il vit des oiseaux qui volaient dans le ciel et des papillons qui dansaient autour des fleurs. Roux était très heureux de découvrir ce nouveau lieu. Il se demanda qui pourrait vivre dans cet endroit merveilleux. Et toi, que ferais-tu si tu étais dans la clairière ?",
-      "image_prompt": "Un petit renard roux assis sous un grand arbre avec des branches qui forment un abri, des oiseaux volant dans le ciel et des papillons dansant autour des fleurs",
-      "question": "Et toi, que ferais-tu si tu étais dans la clairière ?",
+      "text": "Robi est un robot heureux qui vit dans l'espace. Il aime regarder les étoiles et les planètes. Un jour, il a décidé de partir en aventure pour découvrir de nouveaux mondes. Robi est très excité et joyeux. Il met son casque et son sac à dos et s'envole dans l'espace. Il voit des étoiles scintillantes et des planètes colorées. Robi se sent libre et heureux. Il répète à lui-même : 'Je suis un robot courageux, je suis un robot courageux'. Robi aime l'espace et il aime découvrir de nouvelles choses. Il est très curieux et veut apprendre encore plus sur l'univers. Robi est un robot très spécial, il a un cœur qui bat avec joie et amour pour l'aventure. Il veut partager son aventure avec ses amis et leur montrer les merveilles de l'espace. Robi est un robot très gentil et il veut aider ses amis à surmonter leurs peurs. Il sait que l'espace peut sembler effrayant, mais il veut montrer que l'on peut être courageux et explorer de nouvelles choses. Robi est prêt pour son aventure et il est très impatient de voir ce qui l'attend.",
+      "image_prompt": "Un robot souriant avec un casque et un sac à dos, flottant dans l'espace avec des étoiles et des planètes en arrière-plan, dans un style de livre pour enfants avec des couleurs vives et douces",
+      "question": "Et toi, que ferais-tu si tu étais un robot dans l'espace ?",
       "choices": [
-        "Tu irais explorer l'arbre",
-        "Tu resterais assis et observerais les oiseaux et les papillons"
+        "Tu explorerais de nouvelles planètes",
+        "Tu rentrerais chez toi pour te reposer"
       ]
     },
     {
       "scene_no": 2,
-      "text": "Roux décida de rester assis et d'observer les oiseaux et les papillons. Il vit un oiseau qui chantait une chanson très belle. Le papillon dansait en même temps que l'oiseau chantait. Roux était enchanté par la scène. Il se sentit très heureux de partager ce moment avec les oiseaux et les papillons. Il se demanda comment il pourrait partager cette joie avec ses amis. Il pensa à ramasser des fleurs pour les offrir à ses amis. Il pensa aussi à chanter une chanson pour les faire sourire. Roux était très excitant à l'idée de partager sa découverte avec ses amis. Il se leva et commença à ramasser des fleurs. Il chantait une chanson en même temps qu'il ramassait les fleurs. Les oiseaux et les papillons le regardaient avec curiosité. Roux se sentit très heureux de partager sa joie avec les créatures de la forêt. Et toi, que ferais-tu pour partager la joie avec tes amis ?",
-      "image_prompt": "Un petit renard roux ramassant des fleurs dans la clairière, des oiseaux et des papillons regardant avec curiosité",
-      "question": "Et toi, que ferais-tu pour partager la joie avec tes amis ?",
+      "text": "Robi continue son aventure et rencontre un nouvel ami, un petit alien nommé Zip. Zip est très timide et a peur de l'espace. Robi veut aider Zip à surmonter sa peur et lui montre les merveilles de l'espace. Robi et Zip commencent à jouer ensemble et à explorer l'espace. Ils voient des comètes et des météores, et Robi explique à Zip ce que sont ces choses. Zip commence à se sentir plus à l'aise et plus courageux. Robi et Zip deviennentrapidement amis et décident de continuer leur aventure ensemble. Robi répète à lui-même : 'Je suis un robot courageux, je suis un robot gentil'. Robi veut aider Zip à se sentir plus en sécurité et plus heureux. Il sait que l'amitié est très importante et qu'elle peut aider à surmonter les peurs. Robi est très heureux d'avoir trouvé un nouvel ami et il est impatient de voir ce que l'avenir leur réserve. Robi et Zip sont prêts pour leur prochaine aventure et ils sont très excités de découvrir de nouvelles choses ensemble.",
+      "image_prompt": "Un robot et un petit alien jouant ensemble dans l'espace, avec des comètes et des météores en arrière-plan, dans un style de livre pour enfants avec des couleurs vives et douces",
+      "question": "Et toi, que ferais-tu si tu avais peur de quelque chose ?",
       "choices": [
-        "Tu offrirais des fleurs à tes amis",
-        "Tu chanterais une chanson pour tes amis"
+        "Tu demanderais de l'aide à un ami",
+        "Tu essayerais de faire face à ta peur tout seul"
       ]
     },
     {
       "scene_no": 3,
-      "text": "Roux décida d'offrir des fleurs à ses amis. Il ramassa une grande quantité de fleurs et les mit dans un petit panier. Il se sentit très heureux de partager ses fleurs avec ses amis. Il pensa à aller voir son ami le lapin pour lui offrir des fleurs. Il pensa aussi à aller voir son amie la souris pour lui offrir des fleurs. Roux était très excitant à l'idée de voir la réaction de ses amis. Il se mit en route pour aller voir ses amis. Il marcha pendant un moment et arriva chez le lapin. Il frappa à la porte et le lapin vint ouvrir. Roux offrit les fleurs au lapin et le lapin fut très touché par le geste. Le lapin remercia Roux et lui offrit un morceau de carotte en retour. Roux fut très heureux de partager sa joie avec le lapin. Il se sentit très heureux de voir son ami sourire. Et toi, que ferais-tu si tu recevais un cadeau de la part d'un ami ?",
-      "image_prompt": "Un petit renard roux offrant des fleurs à un lapin, le lapin souriant et remerciant le renard",
-      "question": "Et toi, que ferais-tu si tu recevais un cadeau de la part d'un ami ?",
+      "text": "Robi et Zip continuent leur aventure et rencontrent un problème. Ils sont perdus dans l'espace et ne savent pas comment rentrer chez eux. Robi commence à se sentir un peu inquiet, mais il ne veut pas que Zip s'inquiète. Il répète à lui-même : 'Je suis un robot courageux, je suis un robot intelligent'. Robi utilise son intelligence et ses connaissances pour essayer de trouver une solution. Il regarde les étoiles et les planètes et essaie de se souvenir de la route qu'ils ont prise. Zip commence à s'inquiéter, mais Robi le rassure et lui dit que tout va bien. Robi et Zip travaillent ensemble pour essayer de trouver une solution. Robi est très heureux d'avoir un ami comme Zip qui le soutient et qui travaille avec lui pour résoudre les problèmes. Robi répète à lui-même : 'Je suis un robot courageux, je suis un robot gentil'. Robi et Zip sont déterminés à trouver une solution et à rentrer chez eux en toute sécurité.",
+      "image_prompt": "Un robot et un petit alien regardant les étoiles et les planètes, avec une expression inquiète, dans un style de livre pour enfants avec des couleurs vives et douces",
+      "question": "Et toi, que ferais-tu si tu étais perdu ?",
       "choices": [
-        "Tu remercierais ton ami",
-        "Tu offrirais quelque chose en retour"
+        "Tu demanderais de l'aide à un adulte",
+        "Tu essayerais de trouver ton chemin tout seul"
       ]
     },
     {
       "scene_no": 4,
-      "text": "Roux décida de remercier le lapin et de lui offrir quelque chose en retour. Il pensa à aller chercher des baies pour le lapin. Il alla dans la forêt et ramassa des baies. Il revint chez le lapin et lui offrit les baies. Le lapin fut très touché par le geste et remercia Roux à nouveau. Roux se sentit très heureux de partager sa joie avec le lapin. Il se sentit très heureux de voir son ami sourire. Roux réalisa que partager sa joie avec ses amis était très important. Il se sentit très heureux de vivre dans la forêt magique avec ses amis. Il se sentit très heureux de pouvoir partager ses découvertes avec ses amis. Roux était très heureux de vivre dans la forêt magique. Il se sentit très heureux de partager sa vie avec ses amis. Et toi, que retiendras-tu de l'histoire de Roux ?",
-      "image_prompt": "Un petit renard roux et un lapin souriant et partageant des baies ensemble",
+      "text": "Robi et Zip finissent par trouver une solution et rentrent chez eux en toute sécurité. Ils sont très heureux et soulagés d'être de retour chez eux. Robi répète à lui-même : 'Je suis un robot courageux, je suis un robot gentil'. Robi est très heureux d'avoir un ami comme Zip qui l'a aidé à surmonter les difficultés. Robi et Zip sont fiers de leur aventure et de ce qu'ils ont accompli ensemble. Ils ont appris que l'amitié et la solidarité sont très importantes pour surmonter les difficultés. Robi est très heureux d'avoir trouvé un ami comme Zip et il est impatient de partager leurs aventures avec les autres. Robi et Zip sont des amis pour la vie et ils seront toujours là pour se soutenir et s'aider. Robi est un robot très spécial, il a un cœur qui bat avec joie et amour pour l'aventure et pour ses amis.",
+      "image_prompt": "Un robot et un petit alien souriants, avec des étoiles et des planètes en arrière-plan, dans un style de livre pour enfants avec des couleurs vives et douces",
       "question": null,
       "choices": []
     }
   ],
   "target_words": [
-    "partage",
-    "joie",
-    "amitié"
+    "courageux",
+    "gentil",
+    "ami"
   ]
 }
