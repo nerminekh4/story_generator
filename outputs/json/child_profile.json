@@ -1,12 +1,8 @@
 {
-  "name": "sihem",
-  "age": 10,
+  "name": "",
+  "age": 3,
   "reading_level": "avancé",
-  "interests": [
-    "animaux"
-  ],
-  "difficulties": [
-    "dyslexie"
-  ],
+  "interests": [],
+  "difficulties": [],
   "pedagogy_goal": "partage"
 }

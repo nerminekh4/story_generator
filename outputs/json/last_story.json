@@ -1,45 +1,48 @@
 {
-  "title": "L'Ami Renard",
+  "title": "L'Aventure du Petit Renard dans la Forêt Magique",
   "age_group": "4-6",
   "scenes": [
     {
       "scene_no": 1,
-      "text": "Il était une fois, dans une forêt magique, un petit renard nommé Roux. Roux aimait jouer avec ses amis. Il courait, sautait et riait. Roux était très heureux. Il aimait la forêt magique. La forêt était pleine de fleurs colorées et d'arbres hauts. Roux se sentait en sécurité. Il avait des amis qui l'aimaient. Roux aimait partager ses jouets avec ses amis. Il aimait voir ses amis sourire. Roux était un petit renard très gentil. Il aimait aider ses amis. Roux était très fier de ses amis. Il les aimait beaucoup. Roux voulait toujours les rendre heureux. Il faisait tout pour les rendre heureux. Roux était un vrai ami.",
-      "image_prompt": "Un petit renard roux avec un grand sourire, entouré de fleurs colorées et d'arbres hauts, avec des oiseaux volant au-dessus",
-      "question": null,
-      "choices": []
+      "text": "Dans une forêt magique, il y avait un petit renard nommé Roux. Roux aimait jouer avec ses amis dans la forêt. Un jour, il trouva un chemin qu'il n'avait jamais vu avant. Le chemin était bordé de fleurs colorées et de petits cailloux brillants. Roux était très curieux et décida de suivre le chemin pour voir où il menait. Il marcha pendant un moment, et le chemin devint de plus en plus étroit. Roux entendit le bruit d'un ruisseau et vit un petit pont en bois. Il traversa le pont et arriva dans une clairière. Dans la clairière, il y avait un grand arbre avec des branches qui formaient un abri. Roux se sentit en sécurité et décida de s'asseoir sous l'arbre pour se reposer. Il vit des oiseaux qui volaient dans le ciel et des papillons qui dansaient autour des fleurs. Roux était très heureux de découvrir ce nouveau lieu. Il se demanda qui pourrait vivre dans cet endroit merveilleux. Et toi, que ferais-tu si tu étais dans la clairière ?",
+      "image_prompt": "Un petit renard roux assis sous un grand arbre avec des branches qui forment un abri, des oiseaux volant dans le ciel et des papillons dansant autour des fleurs",
+      "question": "Et toi, que ferais-tu si tu étais dans la clairière ?",
+      "choices": [
+        "Tu irais explorer l'arbre",
+        "Tu resterais assis et observerais les oiseaux et les papillons"
+      ]
     },
     {
       "scene_no": 2,
-      "text": "Un jour, Roux a trouvé un beau ballon rouge. Il était très heureux. Il voulait jouer avec le ballon. Mais il se demandait à qui il pourrait le donner. Roux aimait partager. Il voulait donner le ballon à un de ses amis. Mais il ne savait pas qui. Roux réfléchissait. Il pensait à ses amis. Il se demandait qui serait le plus heureux avec le ballon. Roux aimait rendre ses amis heureux. Il voulait choisir l'ami le plus méritant. Roux était très gentil. Il voulait faire plaisir à son ami.",
-      "image_prompt": "Un petit renard roux tenant un ballon rouge, avec un air réfléchi, entouré de quelques amis qui le regardent",
-      "question": "Et toi, que ferais-tu ?",
+      "text": "Roux décida de rester assis et d'observer les oiseaux et les papillons. Il vit un oiseau qui chantait une chanson très belle. Le papillon dansait en même temps que l'oiseau chantait. Roux était enchanté par la scène. Il se sentit très heureux de partager ce moment avec les oiseaux et les papillons. Il se demanda comment il pourrait partager cette joie avec ses amis. Il pensa à ramasser des fleurs pour les offrir à ses amis. Il pensa aussi à chanter une chanson pour les faire sourire. Roux était très excitant à l'idée de partager sa découverte avec ses amis. Il se leva et commença à ramasser des fleurs. Il chantait une chanson en même temps qu'il ramassait les fleurs. Les oiseaux et les papillons le regardaient avec curiosité. Roux se sentit très heureux de partager sa joie avec les créatures de la forêt. Et toi, que ferais-tu pour partager la joie avec tes amis ?",
+      "image_prompt": "Un petit renard roux ramassant des fleurs dans la clairière, des oiseaux et des papillons regardant avec curiosité",
+      "question": "Et toi, que ferais-tu pour partager la joie avec tes amis ?",
       "choices": [
-        "Donner le ballon à ton meilleur ami",
-        "Donner le ballon à un ami qui n'a pas de jouets"
+        "Tu offrirais des fleurs à tes amis",
+        "Tu chanterais une chanson pour tes amis"
       ]
     },
     {
       "scene_no": 3,
-      "text": "Roux a décidé de donner le ballon à un de ses amis qui n'avait pas de jouets. Il s'appelait Léo. Léo était très heureux. Il a remercié Roux. Roux était content de voir Léo sourire. Il était fier de lui-même. Roux avait fait une bonne chose. Il avait rendu Léo heureux. Roux aimait voir ses amis heureux. Il se sentait heureux lui-même. Roux était un vrai ami. Il aimait partager. Il aimait rendre ses amis heureux. Roux était un petit renard très spécial.",
-      "image_prompt": "Un petit renard roux donnant un ballon rouge à un autre animal, avec un grand sourire, entouré de fleurs colorées",
-      "question": null,
-      "choices": []
+      "text": "Roux décida d'offrir des fleurs à ses amis. Il ramassa une grande quantité de fleurs et les mit dans un petit panier. Il se sentit très heureux de partager ses fleurs avec ses amis. Il pensa à aller voir son ami le lapin pour lui offrir des fleurs. Il pensa aussi à aller voir son amie la souris pour lui offrir des fleurs. Roux était très excitant à l'idée de voir la réaction de ses amis. Il se mit en route pour aller voir ses amis. Il marcha pendant un moment et arriva chez le lapin. Il frappa à la porte et le lapin vint ouvrir. Roux offrit les fleurs au lapin et le lapin fut très touché par le geste. Le lapin remercia Roux et lui offrit un morceau de carotte en retour. Roux fut très heureux de partager sa joie avec le lapin. Il se sentit très heureux de voir son ami sourire. Et toi, que ferais-tu si tu recevais un cadeau de la part d'un ami ?",
+      "image_prompt": "Un petit renard roux offrant des fleurs à un lapin, le lapin souriant et remerciant le renard",
+      "question": "Et toi, que ferais-tu si tu recevais un cadeau de la part d'un ami ?",
+      "choices": [
+        "Tu remercierais ton ami",
+        "Tu offrirais quelque chose en retour"
+      ]
     },
     {
       "scene_no": 4,
-      "text": "Roux et Léo ont joué ensemble avec le ballon. Ils ont couru, sauté et riaient. Roux était très heureux. Il aimait jouer avec ses amis. Il aimait partager. Roux était un petit renard très gentil. Il aimait rendre ses amis heureux. Roux était fier de lui-même. Il avait fait une bonne chose. Il avait rendu Léo heureux. Roux aimait la forêt magique. Il aimait ses amis. Roux était un vrai ami. Et toi, que ferais-tu pour rendre tes amis heureux ?",
-      "image_prompt": "Un petit renard roux et un autre animal jouant avec un ballon rouge, entourés de fleurs colorées et d'arbres hauts",
-      "question": "Et toi, que ferais-tu pour rendre tes amis heureux ?",
-      "choices": [
-        "Je partagerais mes jouets avec eux",
-        "Je leur offrirais des fleurs"
-      ]
+      "text": "Roux décida de remercier le lapin et de lui offrir quelque chose en retour. Il pensa à aller chercher des baies pour le lapin. Il alla dans la forêt et ramassa des baies. Il revint chez le lapin et lui offrit les baies. Le lapin fut très touché par le geste et remercia Roux à nouveau. Roux se sentit très heureux de partager sa joie avec le lapin. Il se sentit très heureux de voir son ami sourire. Roux réalisa que partager sa joie avec ses amis était très important. Il se sentit très heureux de vivre dans la forêt magique avec ses amis. Il se sentit très heureux de pouvoir partager ses découvertes avec ses amis. Roux était très heureux de vivre dans la forêt magique. Il se sentit très heureux de partager sa vie avec ses amis. Et toi, que retiendras-tu de l'histoire de Roux ?",
+      "image_prompt": "Un petit renard roux et un lapin souriant et partageant des baies ensemble",
+      "question": null,
+      "choices": []
     }
   ],
   "target_words": [
-    "partager",
-    "ami",
-    "heureux"
+    "partage",
+    "joie",
+    "amitié"
   ]
 }

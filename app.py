@@ -219,7 +219,7 @@ div[data-testid="stHeader"] {display:none !important;}
   font-weight: 900;
   letter-spacing: 0.6px;
   margin: 0;
-  font-size: 56px;
+  font-size: 90px;
   line-height: 1.0;
 }
 .sg-subtitle { margin-top: 10px; font-size: 16px; color: #1f2937; font-weight: 650; }
@@ -263,7 +263,7 @@ section[data-testid="stSidebar"] .stCaption {
 }
 
 /* =========================
-   ✅ Widgets: fond clair + texte noir + bordure blanche
+    Widgets: fond clair + texte noir + bordure blanche
    ========================= */
 
 /* input/textarea */
@@ -276,7 +276,7 @@ section[data-testid="stSidebar"] textarea {
   color: #111827 !important;
 }
 
-/* ✅ Bordure blanche (wrappers BaseWeb) */
+/* Bordure blanche (wrappers BaseWeb) */
 section[data-testid="stSidebar"] div[data-baseweb="base-input"] > div,
 section[data-testid="stSidebar"] div[data-baseweb="input"] > div,
 section[data-testid="stSidebar"] div[data-baseweb="textarea"] > div {
@@ -287,7 +287,7 @@ section[data-testid="stSidebar"] div[data-baseweb="textarea"] > div {
   outline: none !important;
 }
 
-/* ✅ Fix spécial Streamlit pour les contours noirs des text_input (Prénom / Personnage / Lieu) */
+/* Fix spécial Streamlit pour les contours noirs des text_input (Prénom / Personnage / Lieu) */
 section[data-testid="stSidebar"] .stTextInput > div,
 section[data-testid="stSidebar"] .stTextInput > div > div,
 section[data-testid="stSidebar"] .stTextInput div[data-baseweb="base-input"] > div {
@@ -326,12 +326,12 @@ div[role="listbox"] { background:#ffffff !important; border:1px solid rgba(0,0,0
 div[role="option"] * { color:#111827 !important; }
 
 /* =========================
-   ✅ Chips multiselect : rouge + texte NOIR PAS GRAS
+    Chips multiselect : rouge + texte NOIR PAS GRAS
    ========================= */
 section[data-testid="stSidebar"] span[data-baseweb="tag"] {
   background: #ff1f4b !important;
   color: #111827 !important;
-  font-weight: 500 !important;   /* ✅ plus en gras */
+  font-weight: 500 !important;   
   border: 0 !important;
 }
 section[data-testid="stSidebar"] span[data-baseweb="tag"] svg {
@@ -339,7 +339,7 @@ section[data-testid="stSidebar"] span[data-baseweb="tag"] svg {
 }
 
 /* =========================
-   ✅ Focus : bordure blanche (pas de ring noir)
+   Focus : bordure blanche 
    ========================= */
 section[data-testid="stSidebar"] div[data-baseweb="base-input"] > div:focus-within,
 section[data-testid="stSidebar"] div[data-baseweb="input"] > div:focus-within,
@@ -354,7 +354,7 @@ section[data-testid="stSidebar"] .stTextInput > div > div:focus-within {
 }
 
 /* =========================
-   ✅ Boutons rouges (tous)
+    Boutons rouges 
    ========================= */
 .stButton > button {
   border-radius: 14px !important;
@@ -444,6 +444,39 @@ st.markdown(
 )
 
 # ---------------------------
+# AJOUT CSS BOUTON PREMIUM (NE CHANGE PAS TON UI)
+# ---------------------------
+st.markdown(
+    """
+<style>
+.sg-premium{
+  position: fixed;
+  right: 22px;
+  top: 18px;
+  z-index: 999999;
+}
+.sg-premium a{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 14px;
+  background: #ff1f4b;
+  color: #ffffff !important;
+  font-weight: 350;
+  text-decoration: none !important;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.10);
+  border: 0;
+}
+.sg-premium a:hover{
+  filter: brightness(0.95);
+}
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
+# ---------------------------
 # Header (ORIGINAL)
 # ---------------------------
 st.markdown(
@@ -495,6 +528,18 @@ except Exception:
 
 if lang_q in ALLOWED_LANGS:
     st.session_state.ui_lang = lang_q
+
+# ---------------------------
+# Bouton Premium (AJOUT)
+# ---------------------------
+st.markdown(
+    """
+<div class="sg-premium">
+  <a href="?premium=1">Premium</a>
+</div>
+""",
+    unsafe_allow_html=True,
+)
 
 # ---------------------------
 # Afficher les drapeaux (AJOUT)

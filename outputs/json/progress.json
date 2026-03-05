@@ -99,6 +99,62 @@
         }
       ],
       "updated_at": "2026-03-05T00:15:59"
+    },
+    "Enfant": {
+      "profile": {
+        "name": "",
+        "age": 3,
+        "reading_level": "avancé",
+        "interests": [],
+        "difficulties": [],
+        "pedagogy_goal": "partage"
+      },
+      "stories_count": 2,
+      "words_learned": [
+        "partage",
+        "amitié",
+        "générosité",
+        "joie",
+        "cœur"
+      ],
+      "emotions": [
+        "joie"
+      ],
+      "themes": [
+        "amitié"
+      ],
+      "choices": [],
+      "history": [
+        {
+          "created_at": "2026-03-05T00:57:40",
+          "title": "Le Petit Renard et la Forêt Magique",
+          "age_group": "4-6",
+          "emotion": "joie",
+          "theme": "amitié",
+          "n_scenes": 4,
+          "target_words": [
+            "partage",
+            "amitié",
+            "générosité",
+            "joie",
+            "cœur"
+          ]
+        },
+        {
+          "created_at": "2026-03-05T00:57:56",
+          "title": "L'Aventure du Petit Renard dans la Forêt Magique",
+          "age_group": "4-6",
+          "emotion": "joie",
+          "theme": "amitié",
+          "n_scenes": 4,
+          "target_words": [
+            "partage",
+            "joie",
+            "amitié"
+          ]
+        }
+      ],
+      "updated_at": "2026-03-05T00:57:56"
     }
   }
 }
