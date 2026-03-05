@@ -159,19 +159,19 @@
     "hakim": {
       "profile": {
         "name": "hakim",
-        "age": 6,
-        "reading_level": "moyen",
+        "age": 5,
+        "reading_level": "débutant",
         "interests": [
           "magie",
           "espace"
         ],
         "difficulties": [
-          "peur de la séparation",
-          "peur du noir"
+          "peur du noir",
+          "timidité"
         ],
-        "pedagogy_goal": "calme"
+        "pedagogy_goal": "couleurs"
       },
-      "stories_count": 7,
+      "stories_count": 10,
       "words_learned": [
         "magie",
         "forêt",
@@ -185,13 +185,25 @@
         "aide",
         "aider",
         "courageux",
-        "gentil"
+        "gentil",
+        "bleu",
+        "rouge",
+        "jaune",
+        "vert",
+        "violet",
+        "rose",
+        "noir",
+        "gris",
+        "argent",
+        "orange"
       ],
       "emotions": [
-        "joie"
+        "joie",
+        "curiosité"
       ],
       "themes": [
-        "amitié"
+        "amitié",
+        "confiance"
       ],
       "choices": [
         {
@@ -303,9 +315,60 @@
             "gentil",
             "ami"
           ]
+        },
+        {
+          "created_at": "2026-03-05T16:10:28",
+          "title": "L'aventure de Robi dans l'espace",
+          "age_group": "4-6",
+          "emotion": "curiosité",
+          "theme": "confiance",
+          "n_scenes": 4,
+          "target_words": [
+            "bleu",
+            "rouge",
+            "jaune",
+            "vert",
+            "violet",
+            "rose",
+            "noir",
+            "gris",
+            "argent"
+          ]
+        },
+        {
+          "created_at": "2026-03-05T16:11:12",
+          "title": "L'aventure de Hakim dans l'espace",
+          "age_group": "4-6",
+          "emotion": "joie",
+          "theme": "amitié",
+          "n_scenes": 4,
+          "target_words": [
+            "rouge",
+            "bleu",
+            "jaune",
+            "vert",
+            "orange",
+            "violet"
+          ]
+        },
+        {
+          "created_at": "2026-03-05T16:11:49",
+          "title": "L'aventure de Hakim dans l'espace",
+          "age_group": "4-6",
+          "emotion": "joie",
+          "theme": "amitié",
+          "n_scenes": 4,
+          "target_words": [
+            "rouge",
+            "jaune",
+            "bleu",
+            "vert",
+            "violet",
+            "orange"
+          ]
         }
       ],
-      "updated_at": "2026-03-05T14:38:19"
+      "updated_at": "2026-03-05T16:11:49"
     }
   }
 }

@@ -1,14 +1,14 @@
 {
   "name": "hakim",
-  "age": 6,
-  "reading_level": "moyen",
+  "age": 5,
+  "reading_level": "débutant",
   "interests": [
     "magie",
     "espace"
   ],
   "difficulties": [
-    "peur de la séparation",
-    "peur du noir"
+    "peur du noir",
+    "timidité"
   ],
-  "pedagogy_goal": "calme"
+  "pedagogy_goal": "couleurs"
 }

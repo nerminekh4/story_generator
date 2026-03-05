@@ -630,8 +630,8 @@ with st.sidebar:
 
     st.subheader("Histoire")
     age_group = selectbox_fr("Groupe d’âge", ["4-6", "7-9", "10-12"], index=0)
-    character = st.text_input("Personnage", "Un petit renard")
-    place = st.text_input("Lieu", "Une forêt magique")
+    character = st.text_input("Personnage")
+    place = st.text_input("Lieu")
     emotion = selectbox_fr("Émotion", ["joie", "courage", "curiosité", "calme"], index=0)
     theme = selectbox_fr("Valeur", ["amitié", "partage", "confiance", "découverte"], index=0)
     n_scenes = st.slider("Scènes", 3, 6, 4)
